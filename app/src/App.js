@@ -65,6 +65,39 @@ var applicants_arr = [
         "location": "new york"}
     ]
 
+class InfoCard extends Component {
+	constructor(props) {
+	    super(props);
+	  }
+  render() {
+  		return (<div key={this.props.index} className="info card">
+  			<div className="face card-section">
+  				<img src={ face } alt="applicant's face"/>
+  			</div>
+  			<div className="name-info card-section">
+  				<h1>{this.props.info.name}</h1>
+  				<p className="email">{this.props.info.name}@nimble.com</p>
+  			</div>
+  			<div className="status card-section">
+  				<p>{this.props.info.status}</p>
+  			</div>
+  			<div className="application-date card-section">
+  				<p>{this.props.info.applicationDate}</p>
+  			</div>
+  			<div className="last-action card-section">
+  				<p>{this.props.info.lastAction || "No Action"}</p>
+  			</div>
+  			<div className="location card-section">
+  				<p>{this.props.info.location}</p>
+  			</div>
+  			<div className="high-needs card-section">
+  				<p>{this.props.info.highNeeds || "High Needs"}</p>
+  			</div>
+  		</div>
+  	);
+  }
+}
+
 class App extends Component {
   constructor() {
     super();
@@ -75,30 +108,7 @@ class App extends Component {
 
   render() {
   	var cards = this.state.applicants.map(function(info, index){
-  		return <div key={index} className="info card">
-  			<div className="face card-section">
-  				<img src={ face } alt="applicant's face"/>
-  			</div>
-  			<div className="name-info card-section">
-  				<h1>{info.name}</h1>
-  				<p className="email">{info.name}@nimble.com</p>
-  			</div>
-  			<div className="status card-section">
-  				<p>{info.status}</p>
-  			</div>
-  			<div className="application-date card-section">
-  				<p>{info.applicationDate}</p>
-  			</div>
-  			<div className="last-action card-section">
-  				<p>{info.lastAction || "No Action"}</p>
-  			</div>
-  			<div className="location card-section">
-  				<p>{info.location}</p>
-  			</div>
-  			<div className="high-needs card-section">
-  				<p>{info.highNeeds || "High Needs"}</p>
-  			</div>
-  		</div>
+  		return <InfoCard info={info} index={index} />
   	});
 
     return (
