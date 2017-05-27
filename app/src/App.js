@@ -70,15 +70,21 @@ class InfoCard extends Component {
 	    super(props);
 	  }
   render() {
+  	var colorMap = {"needs screening": "red", "Offer Sent": "blue", "Hired": "green"};
+  	var statusColor = colorMap[this.props.info.status];
+
+  	var email = this.props.info.name.split(" ")[0] + "@nimble.com"
+
   		return (<div key={this.props.index} className="info card">
   			<div className="face card-section">
   				<img src={ face } alt="applicant's face"/>
   			</div>
   			<div className="name-info card-section">
   				<h1>{this.props.info.name}</h1>
-  				<p className="email">{this.props.info.name}@nimble.com</p>
+  				<p className="email">{ email }</p>
   			</div>
   			<div className="status card-section">
+  				<p className={"status-dot " + statusColor}></p>
   				<p>{this.props.info.status}</p>
   			</div>
   			<div className="application-date card-section">
