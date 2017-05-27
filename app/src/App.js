@@ -11,17 +11,21 @@ var applicants_arr = [
         "name": "Kathern Machado",
         "status": "needs screening",
         "applicationDate": "5/1/2017",
-        "location": "new york"},
+        "location": "new york",
+        "highNeeds": "Low Needs"
+    },
     {
         "id": 2,
         "name": "Nick Wenzel",
-        "status": "needs screening",
+        "status": "Offer Sent",
         "applicationDate": "5/1/2017",
-        "location": "new york"},
+        "location": "new york",
+        "lastAction": "Reviewed"
+    },
     {
         "id": 3,
         "name": "Brittani Sobus",
-        "status": "needs screening",
+        "status": "Hired",
         "applicationDate": "5/1/2017",
         "location": "new york"},
     {
