@@ -22,3 +22,51 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.applicants-wrapper {
+  padding: 16px;
+}
+
+/**
+* card styles
+*/
+.card {
+  padding: 16px;
+  margin-bottom: 16px;
+  background-color: white;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+}
+
+.card h1 {
+  font-size: 16px;
+  margin-bottom: 16px;
+}
+
+.card p {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 16px;
+}
+
+.card a.action {
+  color: rgb(45, 170, 255);
+  font-size: 20px;
+  cursor: pointer;
+}
+
+/**
+* info styles
+*/
+.info {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.card-section {
+  flex-grow: 1;
+  padding: 8px;
+}
+
+.name-info {
+  flex-grow: 2;
+}

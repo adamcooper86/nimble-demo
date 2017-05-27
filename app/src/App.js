@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import face from './face.png';
 import './App.css';
 
 var applicants_arr = [
@@ -75,28 +75,28 @@ class App extends Component {
 
   render() {
   	var cards = this.state.applicants.map(function(info, index){
-  		return <div key={index} class="info card">
-  			<div class="face">
-  				<img src/>
+  		return <div key={index} className="info card">
+  			<div className="face card-section">
+  				<img src={ face } alt="applicant's face"/>
   			</div>
-  			<div class="name-info">
+  			<div className="name-info card-section">
   				<h1>{info.name}</h1>
-  				<p>{info.name}@nimble.com</p>
+  				<p className="email">{info.name}@nimble.com</p>
   			</div>
-  			<div class="status">
-  				<h1>{info.status}</h1>
+  			<div className="status card-section">
+  				<p>{info.status}</p>
   			</div>
-  			<div class="application-date">
-  				<h1>{info.applicationDate}</h1>
+  			<div className="application-date card-section">
+  				<p>{info.applicationDate}</p>
   			</div>
-  			<div class="last-action">
-  				<h1>{info.lastAction}</h1>
+  			<div className="last-action card-section">
+  				<p>{info.lastAction || "No Action"}</p>
   			</div>
-  			<div class="location">
-  				<h1>{info.location}</h1>
+  			<div className="location card-section">
+  				<p>{info.location}</p>
   			</div>
-  			<div class="high-needs">
-  				<h1>{info.highNeeds}</h1>
+  			<div className="high-needs card-section">
+  				<p>{info.highNeeds || "High Needs"}</p>
   			</div>
   		</div>
   	});
