@@ -1,3 +1,8 @@
+# Note: I used Create React App so that I could develope the demo faster.
+
+To run the demo, go to nimble-demo/app and run `npm start`.
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>
