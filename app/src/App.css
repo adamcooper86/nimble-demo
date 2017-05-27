@@ -82,6 +82,34 @@
   line-height: 0.8;
 }
 
+/**
+* Overlay Styles
+*/
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: calc(100vw - 64px);
+  height: calc(100vh - 64px);
+  background-color: rgba(100, 100, 100, 0.7);
+  padding: 32px;
+  text-align: left;
+
+}
+
+.overlay-box {
+  background-color: white;
+}
+
+.overlay-box .info {
+  box-shadow: none;
+  border-bottom: 1px solid rgba(100, 100, 100, 0.7);
+}
+
+.overlay-extended-info {
+  padding: 0 16px 16px;
+}
+
 .red {
   color: red;
 }

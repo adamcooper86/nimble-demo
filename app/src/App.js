@@ -68,14 +68,21 @@ var applicants_arr = [
 class InfoCard extends Component {
 	constructor(props) {
 	    super(props);
+	    this.handleClick = this.handleClick.bind(this);
 	  }
+
+	handleClick() {
+		if (this.props.setFocus){
+			this.props.setFocus(this.props.index);			
+		}
+	}
   render() {
   	var colorMap = {"needs screening": "red", "Offer Sent": "blue", "Hired": "green"};
   	var statusColor = colorMap[this.props.info.status];
 
   	var email = this.props.info.name.split(" ")[0] + "@nimble.com"
 
-  		return (<div key={this.props.index} className="info card">
+  		return (<div key={this.props.index} className="info card" onClick={this.handleClick}>
   			<div className="face card-section">
   				<img src={ face } alt="applicant's face"/>
   			</div>
@@ -104,18 +111,72 @@ class InfoCard extends Component {
   }
 }
 
+class Overlay extends Component {
+	constructor(props) {
+	    super(props);
+	    this.handleClick = this.handleClick.bind(this);
+	  }
+
+	handleClick() {
+		this.props.setFocus(this.props.index);
+	}
+  render() {
+  		return (<div className="overlay">
+  			<div className="overlay-box">
+  			<InfoCard info={this.props.info} index={this.props.index} />
+  			<div className="overlay-extended-info">
+  				<h1>Nimble Score: 286</h1>
+  				<p>
+  					<b>Bio:</b> This is some basic bio information that the user filled out.
+  					This is some basic bio information that the user filled out.
+  					This is some basic bio information that the user filled out.
+  					This is some basic bio information that the user filled out.
+  					This is some basic bio information that the user filled out.
+  					This is some basic bio information that the user filled out.
+  				</p>
+  				<h4>Work History</h4>
+  				<ul>
+  					<li><b>Sample Work Place</b> <i>Job Title</i> from: 9/22/15 to: 1/1/17</li>
+  					<li><b>Sample Work Place</b> <i>Job Title</i> from: 9/22/15 to: 1/1/17</li>
+  					<li><b>Sample Work Place</b> <i>Job Title</i> from: 9/22/15 to: 1/1/17</li>
+  					<li><b>Sample Work Place</b> <i>Job Title</i> from: 9/22/15 to: 1/1/17</li>
+  					<li><b>Sample Work Place</b> <i>Job Title</i> from: 9/22/15 to: 1/1/17</li>
+  					<li><b>Sample Work Place</b> <i>Job Title</i> from: 9/22/15 to: 1/1/17</li>
+  					<li><b>Sample Work Place</b> <i>Job Title</i> from: 9/22/15 to: 1/1/17</li>
+  				</ul>
+  			</div>
+  			</div>
+  		</div>
+  	);
+  }
+}
+
 class App extends Component {
   constructor() {
     super();
     this.state = {
       applicants: applicants_arr,
+      focus: undefined
     };
+
+    this.setFocus = this.setFocus.bind(this);
   }
 
+  setFocus(index) {
+  	this.setState(prevState => ({
+      focus: index
+    }));
+  }
   render() {
+  	var app = this;
   	var cards = this.state.applicants.map(function(info, index){
-  		return <InfoCard info={info} index={index} />
+  		return <InfoCard info={info} index={index} setFocus={app.setFocus} />
   	});
+
+  	var overLay = "";
+  	if (this.state.focus !== undefined){
+  		overLay = <Overlay info={this.state.applicants[this.state.focus]} index={this.state.focus} setFocus={app.setFocus} />
+  	}
 
     return (
       <div className="App">
@@ -125,6 +186,7 @@ class App extends Component {
         <div className="applicants-wrapper">
           { cards }
         </div>
+        { overLay }
       </div>
     );
   }
