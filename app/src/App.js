@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import face from './face.png';
 import './App.css';
 
+// Obviously, in a real app this wouldn't be here. For the sake of quick
+// developement, I decided not to implement any type of data store, but
+// would if this wasn't a demo app
 var applicants_arr = [
     {
         "id": 1,
@@ -65,14 +68,17 @@ var applicants_arr = [
         "location": "new york"}
     ]
 
+// I put all of the components in this file. In general, I would break these 
+// out into their own file, and export/import explicitly. The value of doing
+// so for the demo is nominal.
 class InfoCard extends Component {
 	constructor(props) {
 	    super(props);
-	    this.handleClick = this.handleClick.bind(this);
+	    this.handleClick = this.handleClick.bind(this); // the bind syntax isn't my favorite thing in life, but the quickest way
 	  }
 
 	handleClick() {
-		if (this.props.setFocus){
+		if (this.props.setFocus){ // allows the InfoCard to be a bit polymorphic
 			this.props.setFocus(this.props.index);			
 		}
 	}
@@ -82,7 +88,8 @@ class InfoCard extends Component {
 
   	var email = this.props.info.name.split(" ")[0] + "@nimble.com"
 
-  		return (<div key={this.props.index} className="info card" onClick={this.handleClick}>
+
+  		return (<section className="info card" onClick={this.handleClick}>
   			<div className="face card-section">
   				<img src={ face } alt="applicant's face"/>
   			</div>
@@ -106,7 +113,7 @@ class InfoCard extends Component {
   			<div className="high-needs card-section">
   				<p>{this.props.info.highNeeds || "High Needs"}</p>
   			</div>
-  		</div>
+  		</section>
   	);
   }
 }
@@ -132,12 +139,14 @@ class Overlay extends Component {
 	}
   render() {
   		return (<div className="overlay">
-  			<div className="overlay-box">
-  			<button onClick={this.handlePreviousClick}>PREVIOUS</button>
-  			<button onClick={this.handleCloseClick}>CLOSE</button>
-  			<button onClick={this.handleNextClick}>NEXT</button>
+  			<article className="overlay-box">
+  			<nav>
+  				<button onClick={this.handlePreviousClick}>PREVIOUS</button>
+  				<button onClick={this.handleCloseClick}>CLOSE</button>
+  				<button onClick={this.handleNextClick}>NEXT</button>
+  			</nav>
   			<InfoCard info={this.props.info} index={this.props.index} />
-  			<div className="overlay-extended-info">
+  			<section className="overlay-extended-info">
   				<h1>Nimble Score: 286</h1>
   				<p>
   					<b>Bio:</b> This is some basic bio information that the user filled out.
@@ -157,8 +166,8 @@ class Overlay extends Component {
   					<li><b>Sample Work Place</b> <i>Job Title</i> from: 9/22/15 to: 1/1/17</li>
   					<li><b>Sample Work Place</b> <i>Job Title</i> from: 9/22/15 to: 1/1/17</li>
   				</ul>
-  			</div>
-  			</div>
+  			</section>
+  			</article>
   		</div>
   	);
   }
@@ -176,6 +185,15 @@ class App extends Component {
   }
 
   setFocus(index) {
+  	// This silently allows previously and next to wrap from end -> beginning
+  	if(index < 0) {
+  		index = this.state.applicants.length - 1;
+  	}
+
+  	if(index >= this.state.applicants.length) {
+  		index = 0;
+  	}
+
   	this.setState(prevState => ({
       focus: index
     }));
@@ -183,18 +201,18 @@ class App extends Component {
   render() {
   	var app = this;
   	var cards = this.state.applicants.map(function(info, index){
-  		return <InfoCard info={info} index={index} setFocus={app.setFocus} />
+  		return <InfoCard key={index} info={info} index={index} setFocus={app.setFocus} />
   	});
 
   	var overLay = "";
   	if (this.state.focus !== undefined){
-  		overLay = <Overlay info={this.state.applicants[this.state.focus]} index={this.state.focus} setFocus={app.setFocus} />
+  		overLay = <Overlay info={this.state.applicants[this.state.focus]} index={this.state.focus} setFocus={this.setFocus} />
   	}
 
     return (
       <div className="App">
         <div className="App-header">
-          <h2>Nimble Applications</h2>
+          <h2>Nimble Applicants</h2>
         </div>
         <div className="applicants-wrapper">
           { cards }

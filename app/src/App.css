@@ -2,14 +2,9 @@
   text-align: center;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}
-
 .App-header {
-  background-color: #222;
-  height: 150px;
+  background-color: rgb(90, 90, 110);
+  height: 72px;
   padding: 20px;
   color: white;
 }
@@ -99,6 +94,12 @@
 
 .overlay-box {
   background-color: white;
+  position: relative;
+}
+
+.overlay-box nav {
+  position: absolute;
+  right: 0;
 }
 
 .overlay-box .info {
