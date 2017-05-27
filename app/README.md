@@ -1,4 +1,4 @@
-# Note: I used Create React App so that I could develope the demo faster.
+# Note: I used Create React App so that I could develop the demo faster.
 
 To run the demo, go to nimble-demo/app and run `npm start`.
 
