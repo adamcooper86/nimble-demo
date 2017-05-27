@@ -114,15 +114,28 @@ class InfoCard extends Component {
 class Overlay extends Component {
 	constructor(props) {
 	    super(props);
-	    this.handleClick = this.handleClick.bind(this);
+	    this.handleCloseClick = this.handleCloseClick.bind(this);
+	    this.handleNextClick = this.handleNextClick.bind(this);
+	    this.handlePreviousClick = this.handlePreviousClick.bind(this);
 	  }
 
-	handleClick() {
-		this.props.setFocus(this.props.index);
+	handleCloseClick() {
+		this.props.setFocus(undefined);
+	}
+
+	handleNextClick() {
+		this.props.setFocus(this.props.index + 1);
+	}
+
+	handlePreviousClick() {
+		this.props.setFocus(this.props.index - 1);
 	}
   render() {
   		return (<div className="overlay">
   			<div className="overlay-box">
+  			<button onClick={this.handlePreviousClick}>PREVIOUS</button>
+  			<button onClick={this.handleCloseClick}>CLOSE</button>
+  			<button onClick={this.handleNextClick}>NEXT</button>
   			<InfoCard info={this.props.info} index={this.props.index} />
   			<div className="overlay-extended-info">
   				<h1>Nimble Score: 286</h1>
